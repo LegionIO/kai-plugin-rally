@@ -1,0 +1,139 @@
+{
+  "name": "rally",
+  "displayName": "Rally",
+  "version": "0.3.1",
+  "description": "Search, plan, synchronize, and manage Broadcom Rally work with OAuth-secured AI tools",
+  "icon": {
+    "lucide": "clipboard-list"
+  },
+  "author": "Kyle Boyer",
+  "permissions": [
+    "config:read",
+    "config:write",
+    "state:publish",
+    "events:publish",
+    "tools:register",
+    "ui:panel",
+    "ui:navigation",
+    "ui:settings",
+    "notifications:send",
+    "auth:window",
+    "safe-storage",
+    "network:fetch",
+    "navigation:open",
+    "tasks:read",
+    "tasks:write"
+  ],
+  "capabilities": ["tasks:sync"],
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "baseUrl": {
+        "type": "string",
+        "default": "https://rally1.rallydev.com",
+        "description": "Rally instance URL"
+      },
+      "loginUrl": {
+        "type": "string",
+        "default": "https://rally1.rallydev.com/",
+        "description": "Rally Login URL used inside Kai's OAuth window"
+      },
+      "encryptedCredentials": {
+        "type": ["object", "null"],
+        "description": "OAuth client credentials encrypted with Electron safeStorage"
+      },
+      "encryptedToken": {
+        "type": ["object", "null"],
+        "description": "OAuth access token encrypted with Electron safeStorage"
+      },
+      "context": {
+        "type": "object",
+        "properties": {
+          "workspaceRef": { "type": "string" },
+          "workspaceName": { "type": "string" },
+          "projectRef": { "type": "string" },
+          "projectName": { "type": "string" }
+        }
+      },
+      "toolPermissions": {
+        "type": "object",
+        "properties": {
+          "read": {
+            "type": "boolean",
+            "default": true,
+            "description": "Allow AI tools that read Rally data"
+          },
+          "write": {
+            "type": "boolean",
+            "default": false,
+            "description": "Allow AI tools that create or update Rally data"
+          },
+          "delete": {
+            "type": "boolean",
+            "default": false,
+            "description": "Allow the guarded Rally delete tool"
+          },
+          "rawRequest": {
+            "type": "boolean",
+            "default": false,
+            "description": "Allow arbitrary WSAPI requests"
+          }
+        }
+      },
+      "sync": {
+        "type": "object",
+        "description": "Background Rally watch-query polling and notifications",
+        "properties": {
+          "enabled": { "type": "boolean", "default": false },
+          "intervalSeconds": { "type": "number", "default": 300, "minimum": 30 },
+          "notifications": { "type": "boolean", "default": true },
+          "notifyOnNew": { "type": "boolean", "default": true },
+          "notifyOnUpdated": { "type": "boolean", "default": true },
+          "maxItemsPerWatch": { "type": "number", "default": 200, "minimum": 1, "maximum": 1000 },
+          "taskBoard": {
+            "type": "object",
+            "description": "Opt-in synchronization between Rally watch results and Kai Tasks",
+            "properties": {
+              "enabled": { "type": "boolean", "default": false },
+              "bidirectional": { "type": "boolean", "default": true },
+              "archiveMissing": { "type": "boolean", "default": true },
+              "workspaceId": { "type": "string" }
+            }
+          },
+          "watches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "enabled": { "type": "boolean", "default": true },
+                "query": { "type": "string" },
+                "workspace": { "type": "string" },
+                "projects": { "type": "array", "items": { "type": "string" } },
+                "types": { "type": "array", "items": { "type": "string" } },
+                "order": { "type": "string" },
+                "projectScopeUp": { "type": "boolean", "default": false },
+                "projectScopeDown": { "type": "boolean", "default": false }
+              },
+              "required": ["id", "name", "query"]
+            }
+          }
+        }
+      },
+      "syncSnapshots": {
+        "type": "object",
+        "description": "Internal non-secret fingerprints used to detect changes between Rally polls"
+      },
+      "taskBoardSnapshot": {
+        "type": "object",
+        "description": "Internal identities for Rally items mirrored to Kai Tasks"
+      },
+      "taskBoardDismissed": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Internal identities for Rally cards the user dismissed from Kai Tasks"
+      }
+    }
+  }
+}

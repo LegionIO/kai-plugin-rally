@@ -1,0 +1,26 @@
+{
+  "name": "kai-plugin-rally",
+  "version": "0.3.1",
+  "description": "Broadcom Rally work-item management for Kai Desktop",
+  "author": "Kyle Boyer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "build:dev": "node esbuild.config.mjs --dev",
+    "dev": "node esbuild.config.mjs --dev --watch",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "dependencies": {
+    "marked": "^16.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "esbuild": "^0.25.8",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
