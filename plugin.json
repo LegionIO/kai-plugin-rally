@@ -1,7 +1,7 @@
 {
   "name": "rally",
   "displayName": "Rally",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Search, plan, synchronize, and manage Broadcom Rally work with OAuth-secured AI tools",
   "icon": {
     "lucide": "clipboard-list"
@@ -24,7 +24,9 @@
     "tasks:read",
     "tasks:write"
   ],
-  "capabilities": ["tasks:sync"],
+  "capabilities": [
+    "tasks:sync"
+  ],
   "configSchema": {
     "type": "object",
     "properties": {
@@ -39,20 +41,34 @@
         "description": "Rally Login URL used inside Kai's OAuth window"
       },
       "encryptedCredentials": {
-        "type": ["object", "null"],
+        "type": [
+          "object",
+          "null"
+        ],
         "description": "OAuth client credentials encrypted with Electron safeStorage"
       },
       "encryptedToken": {
-        "type": ["object", "null"],
+        "type": [
+          "object",
+          "null"
+        ],
         "description": "OAuth access token encrypted with Electron safeStorage"
       },
       "context": {
         "type": "object",
         "properties": {
-          "workspaceRef": { "type": "string" },
-          "workspaceName": { "type": "string" },
-          "projectRef": { "type": "string" },
-          "projectName": { "type": "string" }
+          "workspaceRef": {
+            "type": "string"
+          },
+          "workspaceName": {
+            "type": "string"
+          },
+          "projectRef": {
+            "type": "string"
+          },
+          "projectName": {
+            "type": "string"
+          }
         }
       },
       "toolPermissions": {
@@ -84,20 +100,52 @@
         "type": "object",
         "description": "Background Rally watch-query polling and notifications",
         "properties": {
-          "enabled": { "type": "boolean", "default": false },
-          "intervalSeconds": { "type": "number", "default": 300, "minimum": 30 },
-          "notifications": { "type": "boolean", "default": true },
-          "notifyOnNew": { "type": "boolean", "default": true },
-          "notifyOnUpdated": { "type": "boolean", "default": true },
-          "maxItemsPerWatch": { "type": "number", "default": 200, "minimum": 1, "maximum": 1000 },
+          "enabled": {
+            "type": "boolean",
+            "default": false
+          },
+          "intervalSeconds": {
+            "type": "number",
+            "default": 300,
+            "minimum": 30
+          },
+          "notifications": {
+            "type": "boolean",
+            "default": true
+          },
+          "notifyOnNew": {
+            "type": "boolean",
+            "default": true
+          },
+          "notifyOnUpdated": {
+            "type": "boolean",
+            "default": true
+          },
+          "maxItemsPerWatch": {
+            "type": "number",
+            "default": 200,
+            "minimum": 1,
+            "maximum": 1000
+          },
           "taskBoard": {
             "type": "object",
             "description": "Opt-in synchronization between Rally watch results and Kai Tasks",
             "properties": {
-              "enabled": { "type": "boolean", "default": false },
-              "bidirectional": { "type": "boolean", "default": true },
-              "archiveMissing": { "type": "boolean", "default": true },
-              "workspaceId": { "type": "string" }
+              "enabled": {
+                "type": "boolean",
+                "default": false
+              },
+              "bidirectional": {
+                "type": "boolean",
+                "default": true
+              },
+              "archiveMissing": {
+                "type": "boolean",
+                "default": true
+              },
+              "workspaceId": {
+                "type": "string"
+              }
             }
           },
           "watches": {
@@ -105,18 +153,51 @@
             "items": {
               "type": "object",
               "properties": {
-                "id": { "type": "string" },
-                "name": { "type": "string" },
-                "enabled": { "type": "boolean", "default": true },
-                "query": { "type": "string" },
-                "workspace": { "type": "string" },
-                "projects": { "type": "array", "items": { "type": "string" } },
-                "types": { "type": "array", "items": { "type": "string" } },
-                "order": { "type": "string" },
-                "projectScopeUp": { "type": "boolean", "default": false },
-                "projectScopeDown": { "type": "boolean", "default": false }
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "query": {
+                  "type": "string"
+                },
+                "workspace": {
+                  "type": "string"
+                },
+                "projects": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "types": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "order": {
+                  "type": "string"
+                },
+                "projectScopeUp": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "projectScopeDown": {
+                  "type": "boolean",
+                  "default": false
+                }
               },
-              "required": ["id", "name", "query"]
+              "required": [
+                "id",
+                "name",
+                "query"
+              ]
             }
           }
         }
@@ -131,7 +212,9 @@
       },
       "taskBoardDismissed": {
         "type": "array",
-        "items": { "type": "string" },
+        "items": {
+          "type": "string"
+        },
         "description": "Internal identities for Rally cards the user dismissed from Kai Tasks"
       }
     }

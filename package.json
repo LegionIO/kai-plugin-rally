@@ -1,6 +1,6 @@
 {
   "name": "kai-plugin-rally",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Broadcom Rally work-item management for Kai Desktop",
   "author": "Kyle Boyer",
   "private": true,

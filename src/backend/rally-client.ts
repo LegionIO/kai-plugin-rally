@@ -281,7 +281,7 @@ export class RallyClient {
       ZSESSIONID: this.token.accessToken,
       'X-RallyIntegrationName': 'kai-plugin-rally',
       'X-RallyIntegrationVendor': 'Kai Desktop',
-      'X-RallyIntegrationVersion': '0.3.1',
+      'X-RallyIntegrationVersion': '0.3.2',
     };
   }
 
